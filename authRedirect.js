@@ -39,24 +39,42 @@ function selectAccount () {
 //     console.log("inside handle promise")
 // }
 
+
 function handleResponse(response) {
     if (response !== null) {
-        username = response.account.username;
-        // window.location = "";
-        // showWelcomeMessage(username);
-        var url = 'http://localhost:3000/oauth/token';
-        var form = $('<form action="' + url + '" method="post">' +
-          '<input type="text" name="provider" value="msal" />' +
-          '<input type="text" name="email" value="' + response.account.username + '" />' +
-          '<input type="text" name="token" value="' + response.accessToken + '" />' +
-          '</form>');
-        $('body').append(form);
-        form.submit();
+        // username = response.account.username;
+        // // window.location = "";
+        // // showWelcomeMessage(username);
+        var url = 'http://localhost:3000ur/oauth/token';
+        // var form = $('<form action="' + url + '" method="post">' +
+        //   '<input type="text" name="provider" value="msal" />' +
+        //   '<input type="text" name="email" value="' + response.account.username + '" />' +
+        //   '<input type="text" name="token" value="' + response.accessToken + '" />' +
+        //   '</form>');
+        // $('body').append(form);
+        // form.submit();
         // redirect 
+
+        var elements = document.getElementsByClassName("formVal");
+        var formData = new FormData(); 
+        formData.append("provider", "msal");
+        formData.append("email", response.account.username);
+        formData.append("token", response.accessToken);
+        var xmlHttp = new XMLHttpRequest();
+        xmlHttp.onreadystatechange = function()
+        {
+            if(xmlHttp.readyState == 4 && xmlHttp.status == 200)
+            {
+                alert(xmlHttp.responseText);
+            }
+        }
+        xmlHttp.open("post", url); 
+        xmlHttp.send(formData); 
     } else {
         selectAccount();
     }
 }
+
 
 function signIn() {
 
