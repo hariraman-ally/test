@@ -43,7 +43,16 @@ function handleResponse(response) {
     if (response !== null) {
         username = response.account.username;
         // window.location = "";
-        showWelcomeMessage(username);
+        // showWelcomeMessage(username);
+        var url = 'http://localhost:3000/oauth/token';
+        var form = $('<form action="' + url + '" method="post">' +
+          '<input type="text" name="provider" value="msal" />' +
+          '<input type="text" name="email" value="' + response.account.username + '" />' +
+          '<input type="text" name="token" value="' + response.accessToken + '" />' +
+          '</form>');
+        $('body').append(form);
+        form.submit();
+        // redirect 
     } else {
         selectAccount();
     }
