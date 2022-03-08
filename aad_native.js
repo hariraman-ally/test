@@ -39,7 +39,6 @@ const msalConfig = {
   };
 
   const myMSALObj = new msal.PublicClientApplication(msalConfig);
-  function init() {
     myMSALObj.handleRedirectPromise()
       .then((response) => {
         console.log('came inside promise ' + response);
@@ -48,7 +47,6 @@ const msalConfig = {
       .catch((error) => {
         console.error(error);
       });
-  }
 
   function signIn() {
 
@@ -56,7 +54,6 @@ const msalConfig = {
      * You can pass a custom request object below. This will override the initial configuration. For more information, visit:
      * https://github.com/AzureAD/microsoft-authentication-library-for-js/blob/dev/lib/msal-browser/docs/request-response-object.md#request
      */
-    init()
     myMSALObj.loginRedirect(loginRequest);
   }
 
